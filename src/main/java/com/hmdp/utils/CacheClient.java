@@ -20,12 +20,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/**
- * @author Steven
- * @version 1.0
- * @description:
- * @date 2024/12/20 18:45
- */
+
 @Component
 @RequiredArgsConstructor
 public class CacheClient {
