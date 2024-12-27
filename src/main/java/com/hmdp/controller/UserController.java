@@ -60,7 +60,7 @@ public class UserController {
      */
     @PostMapping("/logout")
     public Result logout(@RequestHeader("authorization") String token){
-        // TODO 实现登出功能
+        // 实现登出功能
         return userService.logout(token);
     }
 

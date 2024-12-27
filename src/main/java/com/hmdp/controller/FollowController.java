@@ -3,8 +3,9 @@ package com.hmdp.controller;
 
 import com.hmdp.dto.Result;
 import com.hmdp.service.IFollowService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/follow")
 public class FollowController {
 
-    @Autowired
+    @Resource
     private IFollowService followService;
 
     @PutMapping("/{id}/{isFollow}")

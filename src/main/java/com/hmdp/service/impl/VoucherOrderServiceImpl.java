@@ -15,7 +15,6 @@ import com.hmdp.utils.UserHolder;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.aop.framework.AopContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.connection.stream.*;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -24,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -45,16 +45,16 @@ import java.util.concurrent.Executors;
 @Service
 public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, VoucherOrder> implements IVoucherOrderService {
 
-    @Autowired
+    @Resource
     private ISeckillVoucherService seckillVoucherService;
 
-    @Autowired
+    @Resource
     private RedisIdWorker redisIdWorker;
 
-    @Autowired
+    @Resource
     private StringRedisTemplate stringRedisTemplate;
 
-    @Autowired
+    @Resource
     private RedissonClient redissonClient;
     private static final DefaultRedisScript<Long> SECKILL_SCRIPT;
     static {
@@ -156,7 +156,7 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
         }
         try {
 //            IVoucherOrderService proxy = (IVoucherOrderService) AopContext.currentProxy();
-            proxy.createVoucherOrder(voucherOrder);
+            createVoucherOrder(voucherOrder);
         } finally {
             lock.unlock();
         }
@@ -191,7 +191,8 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
 //        voucherOrder.setUserId(userId);
 //        orderTasks.add(voucherOrder);
 
-        proxy = (IVoucherOrderService) AopContext.currentProxy();
+        // 版本冲突？
+//        proxy = (IVoucherOrderService) AopContext.currentProxy();
 
         return Result.ok(orderId);
     }

@@ -2,45 +2,36 @@ package com.hmdp;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.hmdp.dto.UserDTO;
-import com.hmdp.entity.Shop;
 import com.hmdp.service.IBlogService;
 import com.hmdp.service.IShopService;
 import com.hmdp.service.IUserService;
-import com.hmdp.service.impl.ShopServiceImpl;
-import com.hmdp.utils.RedisConstants;
 import com.hmdp.utils.RedisIdWorker;
 import com.hmdp.utils.UserHolder;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.geo.Point;
-import org.springframework.data.redis.connection.RedisGeoCommands;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
-import javax.xml.ws.spi.WebServiceFeatureAnnotation;
-import java.util.List;
-import java.util.Map;
+import javax.annotation.Resource;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 
 @SpringBootTest
 class HmDianPingApplicationTests {
 
-    @Autowired
+    @Resource
     IShopService shopService;
 
-    @Autowired
+    @Resource
     RedisIdWorker redisIdWorker;
 
-    @Autowired
+    @Resource
     IBlogService blogService;
 
-    @Autowired
+    @Resource
     IUserService userService;
 
-    @Autowired
+    @Resource
     StringRedisTemplate stringRedisTemplate;
 
     private ExecutorService es = Executors.newFixedThreadPool(300);
